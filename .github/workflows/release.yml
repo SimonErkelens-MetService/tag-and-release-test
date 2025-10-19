@@ -4,6 +4,8 @@ on:
   push:
     tags:
   workflow_run:
+    workflows:
+      - 'build'
     branches:
       - 'main'
 jobs:
