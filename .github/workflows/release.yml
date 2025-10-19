@@ -3,11 +3,14 @@ on:
   release:
   push:
     tags:
+      - '*'
   workflow_run:
     workflows:
       - 'build'
     branches:
       - 'main'
+    types:
+      - requested
 jobs:
   build:
     runs-on: ubuntu-latest
