@@ -14,5 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     name: build-pr
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Hello
         uses: ./.github/workflows/build.yml
