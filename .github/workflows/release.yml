@@ -1,7 +1,11 @@
 name: Build release
 on:
   release:
-
+  push:
+    tags:
+  workflow_run:
+    branches:
+      - 'main'
 jobs:
   build:
     runs-on: ubuntu-latest
