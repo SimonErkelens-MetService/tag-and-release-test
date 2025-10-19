@@ -1,0 +1,9 @@
+name: Build release
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run my awesome test
+        run: echo "Hello world!"

@@ -17,4 +17,4 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Run my awesome test
-        run: echo "Hello world!"
+        uses: ./.github/workflows/build.yml

@@ -1,0 +1,18 @@
+name: Build a pull request
+
+on:
+  workflow_call:
+    inputs:
+      AWS_INTEGRATION_IAM_ROLE_ARN:
+        required: false
+        default: ''
+        type: string
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: build-pr
+    steps:
+      - name: Hello
+        uses: ./.github/workflows/build.yml
