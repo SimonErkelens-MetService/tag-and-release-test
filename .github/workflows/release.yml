@@ -1,0 +1,10 @@
+name: Build release
+on:
+  release:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run my awesome test
+        run: echo "Hello world!"
