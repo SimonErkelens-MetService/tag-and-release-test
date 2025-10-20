@@ -4,13 +4,7 @@ on:
   push:
     tags:
       - '*'
-  workflow_run:
-    workflows:
-      - 'build'
-    branches:
-      - 'main'
-    types:
-      - requested
+
 jobs:
   build:
     if: github.ref == 'refs/heads/main'
