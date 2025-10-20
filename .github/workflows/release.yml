@@ -1,19 +1,32 @@
-name: Build release
+name: Publish release
 on:
   release:
   push:
     tags:
       - '*'
-  workflow_run:
-    workflows:
-      - 'build'
-    branches:
-      - 'main'
-    types:
-      - requested
+
 jobs:
   build:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/build.yml
+  publish:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: [build]
+    ## When build is complete, the artifact exists and can be downloaded
+    # This gives an entirely new, clean, environment to use for publishing
     steps:
-      - name: Run my awesome test
-        run: echo "Hello world!"
+      - uses: actions/download-artifact@v4
+        with:
+          name: result-artifact
+          path: tmp/myartifacts
+      - name: poof
+        run: ls tmp/myartifacts
+      - name: Get the resulting filename
+        run: ls -AU tmp/myartifacts | head -1
+      - name: Put the artifact filename in a variable
+        run: |
+          TESTVAR=`ls -AU tmp/myartifacts | head -1`
+          echo $TESTVAR
+      - name: Publish the artifact
+        run: echo "I am publishing tmp/myartifacts/${TESTVAR}"
