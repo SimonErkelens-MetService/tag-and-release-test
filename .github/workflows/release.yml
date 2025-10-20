@@ -28,4 +28,11 @@ jobs:
           path: tmp/myartifacts
       - name: poof
         run: ls tmp/myartifacts
-
+      - name: Get the resulting filename
+        run: ls -AU tmp/myartifacts | head -1
+      - name: Put the artifact filename in a variable
+        run: |
+          TESTVAR=`ls -AU tmp/myartifacts | head -1`
+          echo $TESTVAR
+      - name: Publish the artifact
+        run: echo "I am publishing tmp/myartifacts/${TESTVAR}"
