@@ -1,4 +1,4 @@
-name: Build release
+name: Publish release
 on:
   release:
   push:
@@ -13,8 +13,16 @@ on:
       - requested
 jobs:
   build:
+    if: github.ref == 'refs/heads/main'
+    uses: ./github/workflows/build.yml
+  publish:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
-      - name: Run my awesome test
-        uses: ./.github/workflows/build.yml
+      - uses: actions/download-artifact@v4
+        with:
+          name: result-artifact
+          path: tmp/myartifacts
+      - name: poof
+        run: ls tmp/myartifacts
+

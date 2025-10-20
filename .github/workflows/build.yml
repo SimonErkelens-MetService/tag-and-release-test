@@ -1,4 +1,4 @@
-name: Build release
+name: Build package
 on:
   workflow_dispatch:
   workflow_call:
@@ -7,5 +7,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create artifact folder
+        run: mkdir -p tmp/myartifacts/
       - name: Run my awesome test
-        run: echo "Hello world!"
+        run: echo "Hello world!" >> tmp/myartifacts/testfile.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: result-artifact
+          path: tmp/myartifacts/
+
