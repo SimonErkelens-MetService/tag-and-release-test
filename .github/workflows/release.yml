@@ -18,6 +18,9 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    needs: [build]
+    ## When build is complete, the artifact exists and can be downloaded
+    # This gives an entirely new, clean, environment to use for publishing
     steps:
       - uses: actions/download-artifact@v4
         with:
